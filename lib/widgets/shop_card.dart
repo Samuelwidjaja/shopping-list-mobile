@@ -46,21 +46,23 @@ Widget build(BuildContext context) {
 // tambahkan else if baru seperti di bawah ini
 else if (item.name == "Logout") {
         final response = await request.logout(
-            // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
             "http://127.0.0.1:8000/auth/logout/");
         String message = response["message"];
         if (response['status']) {
           String uname = response["username"];
+          // ignore: use_build_context_synchronously
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text("$message Sampai jumpa, $uname."),
           ));
+          // ignore: use_build_context_synchronously
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => const LoginPage()),
           );
         } else {
+          // ignore: use_build_context_synchronously
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("$message"),
+            content: Text(message),
           ));
         }
       }
